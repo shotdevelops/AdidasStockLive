@@ -14,7 +14,7 @@ def parseSettings():
     return data
 
 def parseEndpoint(sku,locale):
-    r = Adidas.monitorStockForDrop("EG5293","AU")
+    r = Adidas.monitorStockForDrop(sku,locale)
     if r.status_code==200:
         try:
             JSON = r.json()
