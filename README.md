@@ -1,4 +1,4 @@
-# AdidasStockLive
+# Adidas Waiting Room Stock Live
 Checks if Stock is live for waiting room products.
 
 Best use case of this would be to run when waiting room is live. Don't blame me if you get your IP banned.
