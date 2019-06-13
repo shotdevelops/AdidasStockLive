@@ -12,5 +12,5 @@ To run:
   6. Open and edit settings.json(Enter Locale, SKU)
   7. Run command "python3 main.py"
 # To Do:
-  - Add proxy support
+  - Add proxy support [Completed]
   - Run multiple locales at once (MultiThreading)
