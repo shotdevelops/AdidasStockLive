@@ -1,7 +1,16 @@
-import json,time,sys,os
+import json,time,sys,os,random
 from src.adidas import Adidas
 Adidas = Adidas()
 
+def parseProxies():
+    proxies = []
+    proxy_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"proxies.txt")
+    with open(proxy_path) as f:
+        for i in f.read().splitlines():
+            proxies.append(i)
+    if proxies is []:
+        proxies.append(None)
+    return proxies
 def parseSettings():
     settings_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"settings.json")
     try:
@@ -13,8 +22,8 @@ def parseSettings():
     
     return data
 
-def parseEndpoint(sku,locale):
-    r = Adidas.monitorStockForDrop(sku,locale)
+def parseEndpoint(sku,locale,proxy):
+    r = Adidas.monitorStockForDrop(sku,locale,proxy=proxy)
     if r.status_code==200:
         try:
             JSON = r.json()
@@ -25,6 +34,7 @@ def parseEndpoint(sku,locale):
         return []
 
 if __name__ == "__main__":
+    proxies = parseProxies()
     config = parseSettings()
     sku = config['SKU']
     locale = config['locale']
@@ -32,7 +42,8 @@ if __name__ == "__main__":
     print("Starting Adidas {} Monitor for SKU [{}]".format(locale,sku))
     print("-"*20)
     while True:
-        data = parseEndpoint(sku,locale)
+        proxy = random.choice(proxies)
+        data = parseEndpoint(sku,locale,proxy)
         if data != []:
             print("[{}] is Live!".format(sku))
             print("-"*20)
