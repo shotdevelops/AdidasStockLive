@@ -14,3 +14,4 @@ To run:
 # To Do:
   - Add proxy support [Completed]
   - Run multiple locales at once (MultiThreading)
+  - Add Discord integration 
